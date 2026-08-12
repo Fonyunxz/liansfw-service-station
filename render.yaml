@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: liansfw-service-station-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/status
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: APP_ORIGIN
+        value: https://lively-fuwz.netlify.app
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DEEPSEEK_MODEL
+        value: deepseek-v4-flash
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: COINGECKO_API_KEY
+        sync: false
+      - key: ETHERSCAN_API_KEY
+        sync: false
+      - key: DEBANK_API_KEY
+        sync: false
+      - key: ANKR_API_KEY
+        sync: false
+      - key: GOLDRUSH_API_KEY
+        sync: false
+      - key: ALCHEMY_API_KEY
+        sync: false

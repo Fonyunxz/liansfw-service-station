@@ -1,0 +1,17 @@
+{
+  "name": "liansfw-service-station-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "链上服务站后端 API（Render 部署版）",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check api/chat.js && node --check api/wallet-auth.js && node --check api/self-test.js",
+    "test": "node api/self-test.js"
+  },
+  "dependencies": {
+    "ethers": "^6.17.0"
+  }
+}
