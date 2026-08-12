@@ -203,7 +203,11 @@ async function handleGoldRush(requestUrl, req, res) {
   }
   const target = new URL(providerPath, 'https://api.covalenthq.com');
   copySearchParams(requestUrl.searchParams, target.searchParams, ['path', 'key']);
-  return relayProviderResponse(await providerFetch(target, { headers: { Authorization: `Bearer ${apiKey}` } }), res);
+  // GoldRush accepts Basic auth; legacy Covalent endpoints also accept the
+  // key query parameter. Supplying both keeps old site tools compatible.
+  target.searchParams.set('key', apiKey);
+  const authorization = Buffer.from(`${apiKey}:`).toString('base64');
+  return relayProviderResponse(await providerFetch(target, { headers: { Authorization: `Basic ${authorization}` } }), res);
 }
 
 async function handleDeBank(requestUrl, req, res) {
